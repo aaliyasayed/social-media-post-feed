@@ -5,4 +5,28 @@ body {
   font-size: 14px;
   font-weight: 400;
   font-family: "Roboto","Segoe UI","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif!important;
+  padding-top: 60px;
+  background-color: $primaryBgColor;
+  letter-spacing: 1px;
+  line-height: 1.5;
+  scroll-behavior: smooth;
+}
+
+a {
+  background-color: transparent;
+  color: $colorPrimary;
+  text-decoration: none;
+}
+
+.margin-auto {
+  margin: auto;
+}
+
+.global-container {
+  max-width: 650px;
+}
+
+.post-list-main-container {
+  margin-top: 24px;
+  margin-bottom: 24px;
 }

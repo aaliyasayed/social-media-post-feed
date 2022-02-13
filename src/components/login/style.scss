@@ -1,0 +1,43 @@
+.modal-body {
+  padding: 40px;
+  height: 100%;
+  flex: 1;
+
+  .login-content {
+    flex: 1;
+  }
+  .heading {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 24px;
+    color: #c2c2c2;
+  }
+  input {
+    margin-bottom: 24px;
+    font-size: 16px;
+    height: 37px;
+    border-radius: 12px;
+    padding: 8px 12px;
+    border-radius: 12px;
+    border-color: #141820;
+    background-color: #141820;
+    color: #c2c2c2;
+    transition: all .25s ease-in-out;
+    border: none;
+  }
+  .close {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    color: #c2c2c2;
+    cursor: pointer;
+  }
+  .btn-login {
+    text-align: center;
+    border-radius: 25px;
+    padding: 12px 8px;
+    background-color: transparent;
+    background-image: linear-gradient(90deg,#f0d 0,#3a75ff);
+    transition: filter .2s ease-in-out,-webkit-filter .2s ease-in-out;
+  }
+}

@@ -13,8 +13,8 @@ import './styles/main.scss';
 import Header from './components/header';
 import HomeScreen from './screens/HomeScreen';
 import PostScreen from './screens/PostScreen';
-import LoginScreen from './screens/LoginScreen';
 import PageNotFound from './screens/PageNotFound';
+import Login from './components/login';
 
 class Index extends Component {
   render() {
@@ -27,11 +27,11 @@ class Index extends Component {
               <Routes>
                 <Route path='/' element={<HomeScreen />}/>
                 <Route path='/post/:id' element={<PostScreen />} />
-                <Route path='/login' element={<LoginScreen />} />
                 <Route path='*' element={<PageNotFound />}/>
               </Routes>
             </div>
           </div>
+          <Login closeModal={() => {}} />
         </Provider>
       </Router>
     );

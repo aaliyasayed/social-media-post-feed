@@ -1,11 +1,16 @@
 import ACTION from '../../constants/actions';
 
 const initialState = {
-  bio: null,
-  email: null,
-  image: null,
-  token: null,
-  username: null
+  user : {
+    bio: null,
+    email: null,
+    image: null,
+    token: null,
+    username: null
+  },
+  loginError: null,
+  isLoggedIn: false,
+  loginModal: false
 };
 
 export default function userLogin(state = initialState, actions) {
@@ -13,8 +18,22 @@ export default function userLogin(state = initialState, actions) {
     case ACTION.LOGIN: {
       return {
         ...state,
-        ...actions.payload.user
+        user: actions.payload.user,
+        isLoggedIn: true
       };
+    }
+    case ACTION.TOGGLE_LOGIN_MODAL: {
+      return {
+        ...state,
+        loginModal: actions.payload,
+        loginError: null
+      }
+    }
+    case ACTION.LOGIN_ERROR: {
+      return {
+        ...state,
+        loginError: actions.payload
+      }
     }
     default: return state;
   }

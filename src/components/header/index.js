@@ -1,7 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+
+import {toggleLoginModal} from '../../store/auth/actions';
 
 const Header = () => {
+  const dispatch = useDispatch();
+  const openLoginModal = () => dispatch(toggleLoginModal(true));
 
   return (
     <nav className='header'>
@@ -10,8 +15,7 @@ const Header = () => {
           <div className='col-auto'>
             <Logo />
           </div>
-
-          <div className='col-auto'>
+          <div className='col-auto' onClick={openLoginModal}>
             <div>Login</div>
           </div>
         </div>

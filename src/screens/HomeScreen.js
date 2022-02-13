@@ -1,20 +1,20 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllFeedPosts } from '../store/feed/actions';
+import { getAllFeed } from '../store/feed/actions';
 
 import Post from '../components/post';
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
-  const feed = useSelector(state => state.Feed);
+  const feeds = useSelector(state => state.Feed.feeds);
 
   useEffect(() => {
-    dispatch(getAllFeedPosts());
+    dispatch(getAllFeed());
   }, []);
 
   return (
     <div className='post-list-main-container'>
-      {feed.articles.map((article, key) => <Post key={key} {...article} />)}
+      {feeds?.articles?.map((article, key) => <Post key={key} {...article} />)}
     </div>
   );
 }

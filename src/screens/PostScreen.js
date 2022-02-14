@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from "react-router-dom";
 
 import Like from '../components/like';
-import CommentSection from '../components/comment';
+import CommentList from '../components/comment-list';
 import { getPost } from '../store/feed/actions';
 
 const PostScreen = () => {
@@ -37,7 +37,7 @@ const PostScreen = () => {
           </div>
         </div>
         <div className='comment-section d-flex align-items-center'>
-          <CommentSection slug={slug} />
+          <CommentList slug={slug} />
         </div>
       </div>
       <style>{`

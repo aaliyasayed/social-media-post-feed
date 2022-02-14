@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Like from '../../components/like';
-import CommentSection from '../comment';
+import CommentList from '../comment-list';
 
 const Post = (props) => {
   const { author, body, favorited, favoritesCount, slug } = props;
@@ -27,7 +27,7 @@ const Post = (props) => {
         </Link>
       </div>
       <div className='comment-section d-flex align-items-center'>
-        <CommentSection slug={slug} onDemandLoad />
+        <CommentList slug={slug} onDemandLoad />
       </div>
       <style>{`
         a, a:hover, a:visited {

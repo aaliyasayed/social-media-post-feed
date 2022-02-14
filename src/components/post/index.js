@@ -30,7 +30,7 @@ const Post = (props) => {
         <CommentList slug={slug} onDemandLoad />
       </div>
       <style>{`
-        a, a:hover, a:visited {
+        .post-container-top a, a:hover, a:visited {
           text-decoration: none;
           color: #c2c2c2;
           text-align: left;

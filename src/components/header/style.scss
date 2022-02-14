@@ -1,0 +1,32 @@
+.header {
+  background-color: #fff;
+  border-bottom: 1px solid #dee2e6;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 999;
+  height: 60px;
+  box-shadow: 0 4px 4px rgb(0 0 0 / 10%);
+
+  .logo {
+    a, a:hover, a:visited {
+      font-size: 28px;
+      font-weight: 900;
+      line-height: 44px;
+      background: -webkit-linear-gradient(45deg, #f0d, #3a75ff 80%);
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-align: center;
+      text-decoration: none;
+    }
+  }
+
+  .header-login-space {
+    font-weight: 500;
+    font-size: 16px;
+    padding: 17px 26px;
+    border-left: 1px solid #ececec;
+  }
+}

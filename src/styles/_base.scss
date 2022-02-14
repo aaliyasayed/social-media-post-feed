@@ -12,9 +12,9 @@ body {
   scroll-behavior: smooth;
 }
 
-a {
+a, a:hover, a:visited {
   background-color: transparent;
-  color: $colorPrimary;
+  color: #ccc;
   text-decoration: none;
 }
 

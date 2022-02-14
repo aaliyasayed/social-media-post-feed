@@ -17,7 +17,8 @@ const initialState = {
     favorited: null,
     favoritesCount: null,
   },
-  comments: {}
+  comments: {},
+  loading: false
 };
 
 export default function getFeeds(state = initialState, actions) {
@@ -52,6 +53,12 @@ export default function getFeeds(state = initialState, actions) {
         ...state,
         comments: actions.payload
       }
+    }
+    case ACTION.LOADER: {
+      return {
+        ...state,
+        loading: actions.payload
+      };
     }
     default: return state;
   }

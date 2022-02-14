@@ -3,27 +3,27 @@ import { fetchFeeds, fetchPost, fetchCommentsBySlug, postUserComment, deleteUser
 
 export const getAllFeed = () => async (dispatch) => {
   try {
+    dispatch(showLoader());
     const response = await fetchFeeds();
     dispatch({
       type: ACTION.FEEDS,
       payload: response
     });
+    dispatch(hideLoader());
   } catch (error) {
     console.error(error.message);
-    // dispatch({
-    //   payload: error.message,
-    //   type: 'ERROR'
-    // });
   }
 };
 
 export const getPost = (slug) => async (dispatch) => {
   try {
+    dispatch(showLoader());
     const response = await fetchPost(slug);
     dispatch({
       type: ACTION.POST,
       payload: response
     })
+    dispatch(hideLoader());
   } catch (error) {
     console.error(error.message);
   }
@@ -88,3 +88,7 @@ export const deleteComment = ({slug, id}) => async (dispatch, getState) => {
     console.error(error.message);
   }
 };
+
+export const showLoader = () => ({ type: ACTION.LOADER, payload: true });
+
+export const hideLoader = () => ({ type: ACTION.LOADER, payload: false });

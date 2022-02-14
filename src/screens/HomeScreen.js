@@ -16,7 +16,7 @@ const HomeScreen = () => {
   return (
     <div className='post-list-main-container'>
       {loading
-        ? [1,2,3].map((key) => <ShimmerPost key={key} />)
+        ? [1,2,3,4].map((key) => <ShimmerPost key={key} />)
         : feeds?.articles?.map((article, key) => <Post key={key} {...article} />)
       }
     </div>

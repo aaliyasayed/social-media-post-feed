@@ -10,6 +10,7 @@ export const authenticateUser = (params) => async (dispatch) => {
       payload: response
     });
     dispatch(toggleLoginModal(false));
+    refreshPage();
   } catch (error) {
     console.error(error.message);
     dispatch({
@@ -31,4 +32,9 @@ export const logoutUser = () => (dispatch) => {
     type: ACTION.LOGOUT
   });
   sessionStorage.removeItem('user');
+  refreshPage();
+}
+
+export const refreshPage = () => {
+  window.location.reload(false);
 }

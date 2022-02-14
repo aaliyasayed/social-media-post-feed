@@ -40,7 +40,19 @@ export default function getFeeds(state = initialState, actions) {
         comments: actions.payload
       }
     }
-
+    case ACTION.POST_COMMENTS: {
+      return {
+        ...state,
+        comments: actions.payload
+      }
+    }
+    case ACTION.DELETE_COMMENT: {
+      console.log({payload: actions.payload})
+      return {
+        ...state,
+        comments: actions.payload
+      }
+    }
     default: return state;
   }
 };

@@ -39,6 +39,7 @@ export default class API {
                         return reject(error);
                       });
                     });
+      case 'DELETE': return axios.delete(uri, this.getHeaders());
       default: ;
     }
   }

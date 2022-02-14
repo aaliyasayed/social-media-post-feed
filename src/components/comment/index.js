@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { postComment } from '../../store/feed/actions';
-import { getCommentsBySlug } from '../../store/feed/actions';
+import { getCommentsBySlug, deleteComment } from '../../store/feed/actions';
 import { toggleLoginModal } from '../../store/auth/actions';
 
 const CommentSection = ({slug, onDemandLoad}) => {
   const dispatch = useDispatch();
+  const commentEditorRef = useRef(null);
+
   const { comments } = useSelector(state => state.Feed);
   const { isLoggedIn } = useSelector(state => state.Auth);
 
@@ -24,17 +26,23 @@ const CommentSection = ({slug, onDemandLoad}) => {
     }
   }
 
-  const handleComment = (e) => {
+  const handleComment = () => {
     if (isLoggedIn) {
-      setComment(e?.target?.textContent);
+      setComment(commentEditorRef.current.textContent);
     }
   };
 
+  const resetCommentEditorBox = () => {
+    commentEditorRef.current.textContent = '';
+  };
+
   const handlePostComment = () => {
-    if (isLoggedIn) {
-      const payload = {comment: { body: comment }};
-      dispatch(postComment({ slug, payload }));
-    } else {
+    if (isLoggedIn && comment) {
+      dispatch(postComment({ slug, comment }));
+      setComment('');
+      resetCommentEditorBox();
+    }
+    if (!isLoggedIn) {
       dispatch(toggleLoginModal(true));
     }
   };
@@ -42,7 +50,7 @@ const CommentSection = ({slug, onDemandLoad}) => {
   const toggleComments = () => setShowComments(!showComments);
 
   return (
-    <div>
+    <div className='comment-wrapper'>
       {onDemandLoad &&
         <div className='toggle-comments' onClick={toggleComments}>
           {showComments
@@ -58,7 +66,7 @@ const CommentSection = ({slug, onDemandLoad}) => {
               <img src='https://www.bugheist.com/static/images/dummy-user.png' alt='Avatar' className='avatar' />
             </div>
             <div className='comment-box d-flex align-items-center'>
-              <div className='comment-editor' contentEditable={isLoggedIn} placeholder='Comment on this...' onClick={checkLogin} onInput={(e) => handleComment(e)}></div>
+              <div ref={commentEditorRef} className='comment-editor' contentEditable={isLoggedIn} placeholder='Comment on this...' onClick={checkLogin} onInput={handleComment}></div>
             </div>
           </div>
           <div className='btn-post-comment' onClick={handlePostComment}>
@@ -67,10 +75,13 @@ const CommentSection = ({slug, onDemandLoad}) => {
         </div>
 
         <div className='comment-list'>
-          {comments[slug]?.map((comment, key) => <Comment key={key} {...comment} />)}
+          {comments[slug]?.map((comment, key) => <Comment key={key} {...comment} slug={slug} />)}
         </div>
       </div>}
       <style>{`
+        .comment-wrapper {
+          width: 100%;
+        }
         .toggle-comments {
           color: #3677ef;
         }
@@ -120,19 +131,28 @@ const CommentSection = ({slug, onDemandLoad}) => {
 };
 
 const Comment = (props) => {
-  const { author, body} = props;
+  const dispatch = new useDispatch();
+  const { id, author, body, slug} = props;
   const { username, image } = author;
 
+  const deleteUserComment = () => {
+    dispatch(deleteComment({slug, id}));
+  };
+
   return (
-    <div className='comment d-flex'>
-      <div className='user-comment-avatar'>
-        <img src={image} alt='Avatar' className='avatar' />
+    <div className='comment d-flex justify-content-between'>
+      <div className='d-flex'>
+        <div className='user-comment-avatar'>
+          <img src={image} alt='Avatar' className='avatar' />
+        </div>
+        <div className='comment-body'>
+          <div className='username'>{username}</div>
+          <div className='comment-text'>{body}</div>
+        </div>
       </div>
-      <div className='comment-body'>
-        <div className='username'>{username}</div>
-        <div className='comment-text'>{body}</div>
+      <div className='cursor-pointer' onClick={deleteUserComment}>
+        <i className="fa fa-trash"></i>
       </div>
-      <div><i className="fa fa-trash"></i></div>
       <style>{`
         .comment {
           border-top: 1px solid #07080b;
@@ -148,6 +168,9 @@ const Comment = (props) => {
         }
         .comment-body {
           margin: 0 14px;
+        }
+        .fa-trash {
+          font-size: 20px;
         }
       `}</style>
     </div>

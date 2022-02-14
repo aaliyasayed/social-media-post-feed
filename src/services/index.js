@@ -22,7 +22,13 @@ export const fetchCommentsBySlug = (slug) => {
   return api.call({type: 'GET', uri});
 };
 
-export const postUserComment = ({slug, payload}) => {
+export const postUserComment = ({slug, comment}) => {
+  const payload = {comment: { body: comment }};
   const uri = `https://api.realworld.io/api/articles/${slug}/comments`;
   return api.call({type: 'POST', uri, payload});
-}
+};
+
+export const deleteUserComment = ({slug, id}) => {
+  const uri = `https://api.realworld.io/api/articles/${slug}/comments/${id}`;
+  return api.call({type: 'DELETE', uri});
+};

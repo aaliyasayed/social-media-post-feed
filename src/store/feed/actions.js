@@ -1,5 +1,5 @@
 import ACTION from '../../constants/actions';
-import { fetchFeeds, fetchPost, fetchCommentsBySlug, postUserComment } from '../../services';
+import { fetchFeeds, fetchPost, fetchCommentsBySlug, postUserComment, deleteUserComment } from '../../services';
 
 export const getAllFeed = () => async (dispatch) => {
   try {
@@ -49,13 +49,41 @@ export const getCommentsBySlug = (slug) => async (dispatch, getState) => {
   }
 };
 
-export const postComment = (payload) => async (dispatch) => {
+export const postComment = ({slug, comment}) => async (dispatch, getState) => {
   try {
-    const response = await postUserComment(payload);
+    const comments = getState().Feed.comments;
+    const response = await postUserComment({slug, comment});
+    let result;
+    if (comments[slug]) {
+      result = { ...comments, [slug]: [ ...comments[slug], response.comment ]};
+    } else {
+      result = { ...comments, [slug]: response.comment };
+    }
     dispatch({
       type: ACTION.POST_COMMENTS,
-      payload: response
-    })
+      payload: result
+    });
+  } catch (error) {
+    console.error(error.message);
+  }
+};
+
+export const deleteComment = ({slug, id}) => async (dispatch, getState) => {
+
+  try {
+    const comments = getState().Feed.comments;
+    const modifiedComments = { ...comments};
+    const slugIndex = modifiedComments[slug].findIndex((o) => o.id === id);
+    if (slugIndex !== -1) {
+      modifiedComments[slug].splice(slugIndex, 1);
+    }
+    const updatedCommentList = {...comments, [slug]: modifiedComments[slug]};
+
+    await deleteUserComment({slug, id});
+    dispatch({
+      type: ACTION.DELETE_COMMENT,
+      payload: updatedCommentList
+    });
   } catch (error) {
     console.error(error.message);
   }

@@ -29,13 +29,21 @@ export const getPost = (slug) => async (dispatch) => {
   }
 };
 
-export const getCommentsBySlug = (slug) => async (dispatch) => {
+export const getCommentsBySlug = (slug) => async (dispatch, getState) => {
   try {
+    const comments = getState().Feed.comments;
     const response = await fetchCommentsBySlug(slug);
+
+    const result = {
+      ...comments,
+      [slug]: response.comments
+    }
+
     dispatch({
       type: ACTION.COMMENTS,
-      payload: response
+      payload: result
     })
+
   } catch (error) {
     console.error(error.message);
   }

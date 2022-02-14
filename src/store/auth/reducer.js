@@ -1,7 +1,12 @@
 import ACTION from '../../constants/actions';
 
+export const getUserFromStorage = () => {
+  const user = sessionStorage.getItem('user');
+  return user ? JSON.parse(user) : null;
+}
+
 const initialState = {
-  user : {
+  user : getUserFromStorage() || {
     bio: null,
     email: null,
     image: null,
@@ -9,7 +14,7 @@ const initialState = {
     username: null
   },
   loginError: null,
-  isLoggedIn: false,
+  isLoggedIn: !!getUserFromStorage() || false,
   loginModal: false
 };
 

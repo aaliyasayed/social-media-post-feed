@@ -4,10 +4,12 @@ import ACTION from '../../constants/actions';
 export const authenticateUser = (params) => async (dispatch) => {
   try {
     const response = await login(params);
+    sessionStorage.setItem('user', JSON.stringify(response.user));
     dispatch({
       type: ACTION.LOGIN,
       payload: response
     });
+    dispatch(toggleLoginModal(false));
   } catch (error) {
     console.error(error.message);
     dispatch({

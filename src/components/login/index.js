@@ -40,8 +40,6 @@ const Login = () => {
   const login = () => {
     if (user.email && user.password) {
       dispatch(authenticateUser(user));
-    } else {
-      // TODO: shor error
     }
   };
 

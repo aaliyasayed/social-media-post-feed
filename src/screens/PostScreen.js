@@ -9,7 +9,7 @@ import { getPost } from '../store/feed/actions';
 const PostScreen = () => {
   let { id: slug } = useParams();
   const dispatch = useDispatch();
-  const { post, comments } = useSelector(state => state.Feed);
+  const { post } = useSelector(state => state.Feed);
 
   const { author, body, favorited, favoritesCount } = post;
   const { username, image, bio, followedBy } = author;
@@ -75,7 +75,7 @@ const PostScreen = () => {
           color: #989898;
         }
         .post-body {
-          padding: 4px 14px;
+          padding: 4px 14px 14px;
         }
         .comments {
           margin-left: 12px;

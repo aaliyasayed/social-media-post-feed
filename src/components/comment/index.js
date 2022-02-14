@@ -16,7 +16,7 @@ const CommentSection = ({slug, onDemandLoad}) => {
     if (showComments) {
       dispatch(getCommentsBySlug(slug));
     }
-  }, [slug, showComments]);
+  }, [dispatch, showComments, slug]);
 
   const checkLogin = () => {
     if (!isLoggedIn) {
@@ -31,8 +31,12 @@ const CommentSection = ({slug, onDemandLoad}) => {
   };
 
   const handlePostComment = () => {
-    const payload = {comment: { body: comment }};
-    dispatch(postComment({ slug, payload }));
+    if (isLoggedIn) {
+      const payload = {comment: { body: comment }};
+      dispatch(postComment({ slug, payload }));
+    } else {
+      dispatch(toggleLoginModal(true));
+    }
   };
 
   const toggleComments = () => setShowComments(!showComments);
@@ -63,7 +67,7 @@ const CommentSection = ({slug, onDemandLoad}) => {
         </div>
 
         <div className='comment-list'>
-          {comments?.map((comment, key) => <Comment key={key} {...comment} />)}
+          {comments[slug]?.map((comment, key) => <Comment key={key} {...comment} />)}
         </div>
       </div>}
       <style>{`

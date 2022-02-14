@@ -31,7 +31,7 @@ class Index extends Component {
               </Routes>
             </div>
           </div>
-          <Login closeModal={() => {}} />
+          <Login />
         </Provider>
       </Router>
     );

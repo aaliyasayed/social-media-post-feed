@@ -17,7 +17,7 @@ const initialState = {
     favorited: null,
     favoritesCount: null,
   },
-  comments: []
+  comments: {}
 };
 
 export default function getFeeds(state = initialState, actions) {
@@ -37,7 +37,7 @@ export default function getFeeds(state = initialState, actions) {
     case ACTION.COMMENTS: {
       return {
         ...state,
-        comments: actions.payload.comments
+        comments: actions.payload
       }
     }
 

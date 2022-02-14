@@ -79,54 +79,6 @@ const CommentList = ({slug, onDemandLoad}) => {
           {comments[slug]?.map((comment, key) => <Comment key={key} {...comment} slug={slug} />)}
         </div>
       </div>}
-      <style>{`
-        .comment-wrapper {
-          width: 100%;
-        }
-        .toggle-comments {
-          color: #3677ef;
-        }
-        .show-comment {
-          padding: 0 14px;
-        }
-        .hide-comment {
-          border-bottom: 1px solid #07080b;
-          padding: 21px 14px;
-        }
-        .comment-container {
-          width: 100%;
-        }
-        .comment-user-avatar img {
-          border-radius: 100%;
-          width: 50px;
-          height: 50px;
-        }
-        .comment-box {
-          margin-left: 14px;
-          width: 90%;
-        }
-        .add-comment-container {
-          padding: 10px 14px;
-        }
-        .comment-text-container {
-          width: 100%;
-        }
-        .comment-editor {
-          min-height: 38px;
-          max-height: 400px;
-          flex: 1;
-          outline: none;
-        }
-        .comment-editor[placeholder]:empty:before {
-          content: attr(placeholder);
-          color: #54617b;
-        }
-
-        .btn-post-comment .fa {
-          font-size: 24px;
-          cursor: pointer;
-        }
-      `}</style>
     </div>
   );
 };

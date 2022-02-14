@@ -30,26 +30,6 @@ const Comment = (props) => {
           </div>
         : <></>
       }
-      <style>{`
-        .comment {
-          border-top: 1px solid #07080b;
-          min-height: 70px;
-          width: 100%;
-          flex: 1;
-          padding: 18px 14px;
-        }
-        .user-comment-avatar img {
-          border-radius: 100%;
-          width: 50px;
-          height: 50px;
-        }
-        .comment-body {
-          margin: 0 14px;
-        }
-        .fa-trash {
-          font-size: 20px;
-        }
-      `}</style>
     </div>
   );
 };

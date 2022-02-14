@@ -60,7 +60,7 @@ const Logo = () => {
   return (
     <div className='logo'>
       <Link to='/'>
-        Feedogram
+        Torum
       </Link>
     </div>
   );

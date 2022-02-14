@@ -1,0 +1,16 @@
+.not-found {
+  font-size: 24px;
+  color: #fff;
+  height: calc(100vh - 60px);
+}
+a.redirect {
+  font-size: 14px;
+  margin-top: 20px;
+  border-radius: 25px;
+  padding: 12px 30px;
+  text-decoration: none;
+  color: #fff;
+  background-color: transparent;
+  background-image: linear-gradient(90deg,#f0d 0,#3a75ff);
+  transition: filter .2s ease-in-out,-webkit-filter .2s ease-in-out;
+}

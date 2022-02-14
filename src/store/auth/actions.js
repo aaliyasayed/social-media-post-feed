@@ -24,4 +24,11 @@ export const toggleLoginModal = (flag = true) => (dispatch) => {
     type: ACTION.TOGGLE_LOGIN_MODAL,
     payload: flag
   });
+};
+
+export const logoutUser = () => (dispatch) => {
+  dispatch({
+    type: ACTION.LOGOUT
+  });
+  sessionStorage.removeItem('user');
 }

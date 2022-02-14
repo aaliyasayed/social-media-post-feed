@@ -40,6 +40,13 @@ export default function userLogin(state = initialState, actions) {
         loginError: actions.payload
       }
     }
+    case ACTION.LOGOUT: {
+      return {
+        ...state,
+        user: {},
+        isLoggedIn: false
+      }
+    }
     default: return state;
   }
 };

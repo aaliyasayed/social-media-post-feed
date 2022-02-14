@@ -1,5 +1,6 @@
 const ACTION = {
   LOGIN: 'LOGIN',
+  LOGOUT: 'LOGOUT',
   FEEDS: 'FEEDS',
   POST: 'POST',
   COMMENTS: 'COMMENTS',

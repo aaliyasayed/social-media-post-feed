@@ -1,12 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import {toggleLoginModal} from '../../store/auth/actions';
+import {logoutUser, toggleLoginModal} from '../../store/auth/actions';
 
 const Header = () => {
+  const { isLoggedIn } = useSelector((state) => state.Auth);
+
   const dispatch = useDispatch();
+
   const openLoginModal = () => dispatch(toggleLoginModal(true));
+  const logout = () => dispatch(logoutUser());
+
+  const handleClick = () => {
+    isLoggedIn ? logout() : openLoginModal();
+  };
 
   return (
     <nav className='header'>
@@ -15,8 +23,8 @@ const Header = () => {
           <div className='col-auto'>
             <Logo />
           </div>
-          <div className='col-auto' onClick={openLoginModal}>
-            <div>Login</div>
+          <div className='col-auto cursor-pointer' onClick={handleClick}>
+            {isLoggedIn ? <div>Logout</div> : <div>Login</div>}
           </div>
         </div>
       </div>
